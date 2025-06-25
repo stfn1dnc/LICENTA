@@ -21,6 +21,17 @@ app.use('/api/logs', logRoutes);
 app.use('/api/ai',aiRoutes);
 app.use(errorHandler);
 app.use(cors());
+
+app.get('/', (req, res) => {
+  res.json({
+    message: "API  is online!",
+    endpoints: {
+      login: "/api/auth/login",
+      register: "/api/auth/register",
+      chatPrompt: "/api/ai/prompt"
+    }
+  });
+})
 // Conexiune la Mongo + pornire server
 mongoose.connect(process.env.MONGO_CONNECT_KEY)
   .then(() => {
